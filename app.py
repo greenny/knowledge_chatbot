@@ -20,18 +20,21 @@ os.environ['OPENAI_API_KEY'] = api_key
 
 
 def render_question_input(question_number=1):
-  'Streamlit UI: text input and recursive inputs for Q&A; shows errors inline.'
-  question = st.text_input('Ask something or clear file input', key=f"text_input_{question_number}")
+  with st.chat_message('assistant'):
+    st.write('Ask a question or clear the file input.')
+  with st.chat_message('user'):
+    question = st.text_input('Question:', key=f"text_input_{question_number}")
   if question:
-    try:
-      st.write('AI:', answer(question))
-    except RuntimeError as e:
-      st.error(str(e))
+    with st.chat_message('assistant'):
+      try:
+        st.write(answer(question))
+      except RuntimeError as e:
+        st.error(str(e))
     render_question_input(question_number + 1)
 
 ############## UI ##############
 
-st.title('AI Chatbot')
+st.title('Knowledge Chatbot', text_alignment='center')
 
 if 'last_processed_file_id' not in st.session_state:
   st.session_state['last_processed_file_id'] = None
