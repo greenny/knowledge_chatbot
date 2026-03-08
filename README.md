@@ -1,13 +1,15 @@
 # Knowledge Chatbot
 
-A RAG (Retrieval Augmented Generation) chatbot with a web UI: upload a document, then ask questions and get answers grounded in the file content.
+AI chatbot that answers questions based on uploaded documents.
+Built using RAG (Retrieval Augmented Generation).
 
 ## Features
 
-- **Web interface** — Streamlit app for upload and Q&A
-- **Document upload** — Supports `.txt`, `.md`, `.pdf`, `.doc`, `.docx` (PDF/DOC via Unstructured)
-- **Embeddings & vector store** — Chunks are embedded with OpenAI and stored in ChromaDB (persisted on disk)
-- **RAG answers** — Retrieves relevant chunks, builds a prompt, and generates answers via an LLM (OpenAI)
+- **Upload markdown/text documents**
+- **Automatic chunking**
+- **Vector search**
+- **Context-aware answers**
+- **Streamlit UI**
 
 ## Tech stack
 
@@ -18,22 +20,15 @@ A RAG (Retrieval Augmented Generation) chatbot with a web UI: upload a document,
 - **Streamlit** — Web UI
 - **Unstructured** — Text extraction from PDF and Word files
 
-## Project structure
-
-```
-knowledge_chatbot/
-  main.py                 # Entry point: env setup + Streamlit UI
-  requirements.txt
-  .env.simple             # Template for environment variables
-  data/
-    vector_store.py       # ChromaDB save/query
-  utils/
-    chunking.py           # Document splitting; PDF/DOC extraction
-    prompts.py            # RAG prompt template and builder
-  services/
-    agent.py              # LLM invocation
-    rag.py                # RAG flow: retrieve → prompt → answer
-    ingestion.py          # Upload → chunk → save to vector store
+## Architecture
+```mermaid
+graph TD;
+    A[Document]-->B[Text Splitter];
+    B-->C[Embeddings];
+    C-->D[Vector Database];
+    D-->E[Retriever];
+    E-->F[LLM];
+    F-->G[Answer];
 ```
 
 ## Setup
