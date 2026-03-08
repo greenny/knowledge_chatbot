@@ -26,6 +26,11 @@ def split_text(file):
     text_from_file = _extract_text_binary(file, file.name)
   else:
     text_from_file = file.getvalue().decode('utf-8')
-  documents = [Document(page_content=text_from_file)]
+  documents = [
+    Document(
+      page_content=text_from_file,
+      metadata={'source': filename}
+    )
+  ]
   text_splitter = RecursiveCharacterTextSplitter(chunk_size=300, chunk_overlap=100)
   return text_splitter.split_documents(documents)
