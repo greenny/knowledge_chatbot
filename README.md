@@ -78,7 +78,7 @@ Edit `.env` and set:
 From the project root (with your venv activated):
 
 ```bash
-streamlit run main.py
+streamlit run app.py
 ```
 
 The app opens in your browser. Upload a file (e.g. a `.txt` or `.pdf`), wait for it to be processed once, then type questions; answers are generated from the document content via RAG.
