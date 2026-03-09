@@ -1,4 +1,4 @@
-import data.vector_store as vstore
+import rag.vectordb as vstore
 from utils.chunking import split_text
 
 

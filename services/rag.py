@@ -1,6 +1,6 @@
 import logging
 
-import data.vector_store as vstore
+import rag.vectordb as vstore
 from utils.prompts import build_prompt
 
 from services.agent import ask_agent
