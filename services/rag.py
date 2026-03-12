@@ -25,7 +25,14 @@ def answer(question):
     try:
         prompt = build_prompt(results, question)
         response = ask_agent(prompt)
-        return response.content
+        return response
     except Exception as e:
         logger.exception('LLM call failed')
         raise RuntimeError('AI request failed. Check your API key and connection.') from e
+
+def stream_answer(question):
+    """Streams the answer"""
+    for chunk in answer(question):
+        text = getattr(chunk, "content", None)
+        if text:
+            yield text
