@@ -21,13 +21,14 @@ os.environ["OPENAI_API_KEY"] = api_key
 
 
 def render_answer():
+    """ Finds the answer """
     question = st.session_state.user_question
     st.session_state.messages.append({
         "role": "user",
         "content": question
     })
 
-    if st.session_state["last_processed_file_id"] == None:
+    if st.session_state['last_processed_file_id'] is None:
         st.session_state.messages.append({
             "role": "assistant",
             "content": "Please upload a file first"
@@ -56,7 +57,7 @@ if "answer" not in st.session_state:
 
 st.title("Knowledge Chatbot", text_alignment="center")
 
-file = st.file_uploader("", type=["txt", "doc", "pdf", "md"])
+file = st.file_uploader("Upload a file", type=["txt", "doc", "pdf", "md"])
 
 if file:
     file_id = (file.name, file.size)
@@ -75,7 +76,7 @@ with st.container():
     if st.session_state.answer:
         text_answer = ""
         with st.chat_message("assistant"):
-            text_answer = st.write_stream(stream_answer(question), cursor="▌")
+            text_answer = st.write_stream(st.session_state.answer, cursor="▌")
 
             st.session_state.messages.append({
                 "role": "assistant",
