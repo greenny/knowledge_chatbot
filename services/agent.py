@@ -6,5 +6,5 @@ from langchain_openai import ChatOpenAI
 
 def ask_agent(prompt):
     """Invoke the LLM with the given prompt. Model is configurable via OPENAI_MODEL."""
-    model = ChatOpenAI(model=os.environ.get('OPENAI_MODEL', 'gpt-4o-mini'))
+    model = ChatOpenAI(model=os.environ.get('OPENAI_MODEL', 'gpt-4o-mini'), temperature=0)
     return model.stream(prompt)
