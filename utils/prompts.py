@@ -4,12 +4,13 @@ from langchain_core.prompts import ChatPromptTemplate
 
 PROMPT_TEMPLATE = """
 Answer the question based only on the following context:
-
 {context}
-
 ---
-
 Answer the question based on the above context: {question}
+Use the provided context if it is relevant.
+
+If the context does not contain the answer,
+use your general knowledge.
 """
 
 def build_prompt(results, question):
