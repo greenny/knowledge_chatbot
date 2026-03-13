@@ -17,7 +17,6 @@ api_key = os.environ.get('OPENAI_API_KEY')
 if not api_key or not api_key.strip():
     st.error("OPENAI_API_KEY is not set. Add it to your .env file (see .env.simple).")
     st.stop()
-os.environ["OPENAI_API_KEY"] = api_key
 
 
 def render_answer():
@@ -47,7 +46,7 @@ if "last_processed_file_id" not in st.session_state:
 if "messages" not in st.session_state:
     st.session_state.messages = [{
         "role": "assistant",
-        "content": "Please apload a file and ask your question."
+        "content": "Please upload a file and ask your question."
     }]
 
 if "answer" not in st.session_state:

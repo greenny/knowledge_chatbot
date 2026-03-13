@@ -20,7 +20,7 @@ def answer(question):
         raise RuntimeError('Search failed. Please try again.') from e
 
     if not results:
-        return 'Unable to find matching results.'
+        raise RuntimeError("Unable to find matching results.")
 
     try:
         prompt = build_prompt(results, question)
