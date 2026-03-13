@@ -19,7 +19,7 @@ def answer(question):
         logger.exception('Vector store query failed')
         raise RuntimeError('Search failed. Please try again.') from e
 
-    if len(results) == 0 or results[0][1] < 0.6:
+    if not results:
         return 'Unable to find matching results.'
 
     try:

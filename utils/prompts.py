@@ -15,6 +15,6 @@ use your general knowledge.
 
 def build_prompt(results, question):
     """Use chunks and user question to build prompt template"""
-    context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
+    context_text = "\n\n".join([doc.page_content for doc in results])
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
     return prompt_template.format(context=context_text, question=question)

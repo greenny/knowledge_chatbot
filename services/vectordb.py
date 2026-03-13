@@ -26,7 +26,8 @@ def query_db(question):
     try:
         embedding_function = OpenAIEmbeddings()
         db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embedding_function)
-        return db.similarity_search_with_relevance_scores(question, k=3)
+        retriever = db.as_retriever(search_type="mmr", search_kwargs={"k": 3})
+        return retriever.invoke(question)
     except Exception:
         logger.exception('Failed to query vector store')
         raise
